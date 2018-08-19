@@ -129,5 +129,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "images")
 ]
 
+ALLOWED_HOSTS=['djangobasicwebimagedisplayer.herokuapp.com']
+
 import dj_database_url
 DATABASES['default'] = dj_database_url.config()
