@@ -77,12 +77,12 @@ WSGI_APPLICATION = 'galeria.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': "galeria",
-        'USER': "root",
-        "PASSWORD": "root",
+        'USER': "Willy",
+        "PASSWORD": "",
         "HOST": "127.0.0.1",
-        "PORT": "3306"
+        "PORT": "5432"
     }
 }
 
@@ -128,3 +128,6 @@ STATIC_ROOT = "staticFiles"
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "images")
 ]
+
+import dj_database_url
+DATABASES['default'] = dj_database_url.config()
