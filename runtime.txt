@@ -2,4 +2,3 @@ python-2.7.13
 gunicorn
 django-bootstrap3
 Pillow
-psycopg2
