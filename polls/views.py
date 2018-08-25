@@ -5,12 +5,11 @@ import json
 
 from django.contrib.auth import authenticate, login, logout
 from django.core import serializers
-from django.core.urlresolvers import reverse
-from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.shortcuts import render
+from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
-from .models import Imagen, ImageForm, UserForm
+from .models import Imagen
 from django.contrib.auth.models import User
 
 # Create your views here.
@@ -30,11 +29,11 @@ def index(request):
 def add_image(request):
     if request.method == "POST":
         new_imagen = Imagen(url=request.POST['url'],
-                              title=request.POST.get("title"),
-                              description=request.POST.get("description"),
-                              type=request.POST.get("type"),
-                              imageFile=request.FILES["imageFile"],
-                              user=request.user)
+                            title=request.POST.get("title"),
+                            description=request.POST.get("description"),
+                            type=request.POST.get("type"),
+                            imageFile=request.FILES["imageFile"],
+                            user=request.user)
         new_imagen.save()
 
     return HttpResponse(serializers.serialize("json", [new_imagen]))
@@ -81,11 +80,26 @@ def logout_view(request):
 
 
 @csrf_exempt
-def islogged_view(request):
+def isLogged_view(request):
     if request.user.is_authenticated():
         mensaje = "ok"
     else:
         mensaje = "no"
 
-    return JsonResponse({"message": mensaje})
+    return JsonResponse({"mensaje": mensaje})
 
+
+def ver_imagenes(request):
+    return render(request, "polls/index.html")
+
+
+def agregar_imagen(request):
+    return render(request, "polls/image_form.html")
+
+
+def agregar_usuario(request):
+    return render(request, "polls/registro.html")
+
+
+def ingresar(request):
+    return render(request, "polls/login.html")
